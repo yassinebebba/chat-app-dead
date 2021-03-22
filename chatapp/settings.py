@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'main.Account'
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -125,3 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'main:login'
+LOGOUT_REDIRECT_URL = 'main:login'

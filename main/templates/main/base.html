@@ -14,7 +14,11 @@
     <title>Title</title>
 </head>
 <body class="{{ body_class }}">
-
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" id="message_container" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
 {% block body %}
 {% endblock %}
 <!-- Bootstrap core JavaScript
@@ -26,5 +30,15 @@
 <script>window.jQuery || document.write('<script src="dist/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="{% static 'main/js/vendor/popper.min.js' %}"></script>
 <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+
+<script>
+var message_element = document.getElementById("message_container");
+
+setTimeout(function(){
+   message_element.style.display = "none";
+}, 3000);
+
+
+</script>
 </body>
 </html>

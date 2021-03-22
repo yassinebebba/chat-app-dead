@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import _user_has_perm
@@ -36,7 +35,6 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class Account(AbstractUser):
     email = models.EmailField(max_length=255, unique=True, null=False)
     username = models.CharField(max_length=30, unique=True, null=False)
@@ -65,6 +63,7 @@ class Account(AbstractUser):
 
     def __str__(self):
         return f'{self.username} -> {self.email}'
+
 
 
 class Message(models.Model):
