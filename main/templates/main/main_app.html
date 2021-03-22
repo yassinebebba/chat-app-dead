@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="inside">
                     <div class="nav nav-tab menu">
-                        <button class="btn"><img class="avatar-xl" src="dist/img/avatars/avatar-male-1.jpg"
+                        <button class="btn"><img class="avatar-xl" src="{{ request.user.profile.profile_picture.url }}"
                                                  alt="avatar"></button>
                         <a href="#members" data-toggle="tab"><i class="material-icons">account_circle</i></a>
                         <a href="#discussions" data-toggle="tab" class="active"><i class="material-icons active">chat_bubble_outline</i></a>

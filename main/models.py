@@ -64,7 +64,13 @@ class Account(AbstractUser):
     def __str__(self):
         return f'{self.username} -> {self.email}'
 
+class Profile(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE, null=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures')
 
+
+    def __str__(self):
+        return f'{self.user.username}'
 
 class Message(models.Model):
     sender = models.ForeignKey(Account, related_name='sender_set', on_delete=models.DO_NOTHING, null=False)
