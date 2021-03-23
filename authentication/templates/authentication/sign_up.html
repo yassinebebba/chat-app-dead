@@ -22,25 +22,30 @@
                                 </button>
                             </div>
                             <p>or use your email for registration:</p>
-                            <form class="signup">
+                            <form action="." method="post" class="signup"> {% csrf_token %}
                                 <div class="form-parent">
                                     <div class="form-group">
-                                        <input type="text" id="inputName" class="form-control" placeholder="Username"
+                                        <input type="text" id="inputName" name="username" class="form-control" placeholder="Username"
                                                required>
                                         <button class="btn icon"><i class="material-icons">person_outline</i></button>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" id="inputEmail" class="form-control"
+                                        <input type="email" id="inputEmail" name="email" class="form-control"
                                                placeholder="Email Address" required>
                                         <button class="btn icon"><i class="material-icons">mail_outline</i></button>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" id="inputPassword" class="form-control"
+                                    <input type="password" name="password1" id="inputPassword1" class="form-control"
                                            placeholder="Password" required>
                                     <button class="btn icon"><i class="material-icons">lock_outline</i></button>
                                 </div>
-                                <button type="submit" class="btn button" formaction="index-2.html">Sign Up</button>
+                                  <div class="form-group">
+                                    <input type="password" name="password2" id="inputPassword2" class="form-control"
+                                           placeholder="Password" required>
+                                    <button class="btn icon"><i class="material-icons">lock_outline</i></button>
+                                </div>
+                                <button type="submit" class="btn button">Sign Up</button>
                                 <div class="callout">
                                     <span>Already a member? <a href="{% url 'authentication:login_view' %}">Sign In</a></span>
                                 </div>

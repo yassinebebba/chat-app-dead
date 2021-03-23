@@ -1,9 +1,16 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import reverse
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+
 from datetime import datetime
+
+
+from .forms import UserCreationForm
 from .forms import CustomLoginForm
+
 
 
 class CustomLoginView(SuccessMessageMixin, LoginView):
@@ -35,4 +42,15 @@ def login_view(request):
 
 
 def sign_up_view(request):
-    return render(request, 'authentication/sign_up.html', context={'body_class': 'start'})
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account has been created successfully!')
+            return redirect(reverse('authentication:login_view'))
+    form = UserCreationForm()
+    context = {
+        'body_class': 'start',
+        'form': form
+    }
+    return render(request, 'authentication/sign_up.html', context=context)
