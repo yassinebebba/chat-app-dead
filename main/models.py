@@ -5,6 +5,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import _user_has_perm
 from django.contrib.auth.models import _user_has_module_perms
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class AccountManager(BaseUserManager):
@@ -72,6 +73,22 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+
+class Friend(models.Model):
+    user = models.ForeignKey(Account, related_name='user_set', on_delete=models.CASCADE, null=False)
+    friend = models.ForeignKey(Account, related_name='friend_set', on_delete=models.CASCADE, null=False)
+
+    def check_friend(self, user, friend):
+        try:
+            if Friend.objects.get(user=user, friend=friend):
+                return True
+        except ObjectDoesNotExist:
+            return False
+
+    def __str__(self):
+        return f'{self.user.username} is friends with {self.friend.username}'
+
+
 class Message(models.Model):
     sender = models.ForeignKey(Account, related_name='sender_set', on_delete=models.DO_NOTHING, null=False)
     receiver = models.ForeignKey(Account, related_name='receiver_set', on_delete=models.DO_NOTHING, null=False)
@@ -80,6 +97,7 @@ class Message(models.Model):
     creation_date = models.DateTimeField(auto_now=True, null=False)
     read = models.BooleanField(default=False, null=False)
     deleted = models.BooleanField(default=False, null=False)
+    
 
     def __str__(self):
         return f'{self.sender} ({self.creation_date})-> {self.receiver}'

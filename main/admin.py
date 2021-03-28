@@ -8,6 +8,7 @@ from .forms import UserChangeForm
 from .models import Message
 from .models import Account
 from .models import Profile
+from .models import Friend
 
 class UserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
@@ -34,6 +35,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(Account, UserAdmin)
 admin.site.register(Profile)
+admin.site.register(Friend)
 admin.site.register(Message)
 admin.site.unregister(Group)
 
