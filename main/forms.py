@@ -34,3 +34,9 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+class MessageForm(forms.Form):
+    message = forms.Textarea()
+
+    class Meta:
+        fields = ('message',)

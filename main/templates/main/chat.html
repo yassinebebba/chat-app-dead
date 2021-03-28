@@ -977,8 +977,11 @@
                         <div class="container">
                             <div class="col-md-12">
                                 <div class="bottom">
-                                    <form class="position-relative w-100">
-                                        <textarea class="form-control" placeholder="Start typing for reply..."
+                                    <form method="post"
+                                          action="{% url 'authentication:main:chat_view' current_chat.id %}"
+                                          class="position-relative w-100"> {% csrf_token %}
+                                        <textarea class="form-control" name="message"
+                                                  placeholder="Start typing for reply..."
                                                   rows="1"></textarea>
                                         <button class="btn emoticons"><i class="material-icons">insert_emoticon</i>
                                         </button>
